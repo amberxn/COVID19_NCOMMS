@@ -31,7 +31,7 @@ df.tar.metab <- df.tar.metab[, -grep("arnitine", colnames(df.tar.metab))]
 cpd.tar <- m_c.tar$KEGG[match(colnames(df.tar.metab), m_c.tar$Metabolite)]
 
 # Untargeted metabolomics data
-df.untar.metab <- read.csv("COVID-19.untargeted.QCmad-TIC.csv", 
+df.untar.metab <- read.csv("COVID-19.untargeted.QCmad-TIC.csv",  
                            header = T, sep = ",", row.names = 1, check.names = F)
 cpd.untar <- m_c.untar$KEGG[match(colnames(df.untar.metab), m_c.untar$Metabolite)]
 df.untar.metab <- df.untar.metab[, -na.omit(match(cpd.tar[which(cpd.tar != "-")], cpd.untar))]
@@ -188,7 +188,7 @@ if (T) {
   ggplot(clust.cm.plot, aes(Point, Analyte)) +
     geom_tile(aes(fill = Level), color = "black", size = 0.4, height = 1, width = 1) + 
     scale_fill_gradientn(colours = c(colorRampPalette(c("#3d67a3", "white","#ce1020"))(100)), 
-                         limits = c(-7, 7)) + 
+                         limits = c(-7, 7)) +
     theme_dendro() + 
     theme(plot.margin = margin(1, 1, 1, 1, "cm")) +
     coord_fixed(ratio = 1) +
