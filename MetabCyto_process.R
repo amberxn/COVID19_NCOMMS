@@ -8,7 +8,7 @@ options(stringsAsFactors = F)
 # Prepare Metabolomica Data of COVID-19 (, non-COVID-19) Patients and Healthy Controls ---------------------------
 
 # Reference files
-m_c.tar <- read.xlsx(paste0(wd1, "metabolite.HMDB.KEGG.HULAB.xlsx"),
+m_c.tar <- read.xlsx(paste0(wd1, "metabolite.HMDB.KEGG.HULAB.xlsx"), 
                      sheetIndex = 2, startRow = 1, header = T, as.data.frame = T)
 m_c.untar <- read.xlsx(paste0(wd1, "metabolite.HMDB.KEGG.HULAB.xlsx"),
                        sheetIndex = 3, startRow = 1, header = T, as.data.frame = T)
