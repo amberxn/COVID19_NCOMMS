@@ -267,7 +267,7 @@ if (T) {
                 "Purine metabolism" = "#e31a1c", "Pyrimidine metabolism" = "#fdbf6f", 
                 "Primary bile acid biosynthesis" = "#fb9a99",
                 "Cysteine and methionine metabolism" = "#b2df8a", 
-                "Valine, leucine and isoleucine biosynthesis" = "#cab2d6", 
+                "Valine, leucine and isoleucine biosynthesis" = "#cab2d6",
                 "Amino acid metabolism" = "#557571", )
   dir_color <- list("pos" = "#eae222", "neg" = "#25667b")
   
