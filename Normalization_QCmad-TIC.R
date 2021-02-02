@@ -72,4 +72,5 @@ colnames(df_final.QC)[1] <- "Metabolite"
 df_final <- cbind(df_final.S[, -1], df_final.QC[, -1])
 
 # save
-write.csv(df_final, "COVID-19.untargeted.QCmad-TIC.csv", quote = F, row.names = T)
+write.csv(df_final, "COVID-19.untargeted.QCmad-TIC.csv", 
+          quote = F, row.names = T)
