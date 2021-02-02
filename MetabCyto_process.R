@@ -301,7 +301,7 @@ ggplot(cyto.mhu.bind, aes(Group, cytokine)) +
   scale_fill_gradientn(colours = colorRampPalette(c("#3d67a3", "white", "#ce1020"))(99)[-c(47:49, 50, 51:53)], 
                        limits = c(-6,6), breaks = c(-6, -3, 0, 3, 6)) +
   scale_shape_manual(values = c(21, 23)) +
-  scale_color_manual(values = c("black", "grey50")) + 
+  scale_color_manual(values = c("black", "grey50")) +
   scale_size_continuous(range = c(1, 3.5), breaks = c(1, 3, 5, 7)) +
   theme_dendro() +
   theme(plot.margin = margin(1, 1, 1, 1, "cm")) +
