@@ -18,6 +18,6 @@ To cluster cytokines and mentaolites by Mfuzz, to perform regression analysis be
 > Source data are provided in Source Data file with this paper.
 
 #### Citation
-Host metabolite-cytokine correlation landscape in SARS-CoV-2 infection. *Nat Commun* (2021). 
+Integrated cytokine and metabolite analysis reveals immunometabolic reprogramming in COVID-19 patients with therapeutic implications. *Nat Commun* (2021). 
 
 Thanks for your interest :)
