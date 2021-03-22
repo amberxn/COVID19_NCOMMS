@@ -1,6 +1,6 @@
 # COVID19_NCOMMS
 
-This repository includes custom codes to perform metabolomics data normalization, process cytokine data, perform regression analysis, and cluster cytokines and metabolits by Mfuzz in **Host metabolite-cytokine correlation landscape in SARS-CoV-2 infection**.
+This repository includes custom codes to perform metabolomics data normalization, process cytokine data, perform regression analysis, and cluster cytokines and metabolits by Mfuzz in **Integrated cytokine and metabolite analysis reveals immunometabolic reprogramming in COVID-19 patients with therapeutic implications**.
 
 #### Normalization_QCmad-TIC.R
 To perform QCmad-TIC normalization of targeted and untargeted metabolomics NA-replaced raw peak area data.
@@ -18,6 +18,6 @@ To cluster cytokines and mentaolites by Mfuzz, to perform regression analysis be
 > Source data are provided in Source Data file with this paper.
 
 #### Citation
-Integrated cytokine and metabolite analysis reveals immunometabolic reprogramming in COVID-19 patients with therapeutic implications. *Nat Commun* (2021). 
+Xiao, N., Nie, M., Pang, H. et al. Integrated cytokine and metabolite analysis reveals immunometabolic reprogramming in COVID-19 patients with therapeutic implications. Nat Commun 12, 1618 (2021). https://doi.org/10.1038/s41467-021-21907-9 
 
 Thanks for your interest :)
