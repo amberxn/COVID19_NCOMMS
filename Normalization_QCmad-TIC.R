@@ -4,7 +4,7 @@ options(stringsAsFactors = F, warn = -1)
 # Prepare NA-replaced Metabolomics Raw Peak Area Data ---------------------------
 
 # NA-replaced peak area
-df <- read.csv("5-worksheet after filling gaps.csv", sep = ",", header = T)
+df <- read.csv("5-worksheet after filling gaps.csv", sep = ",", header = T) 
 
 # how many batch do you have? 
 total_batch_num <- 2
