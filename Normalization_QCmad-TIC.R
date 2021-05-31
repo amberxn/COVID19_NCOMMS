@@ -4,7 +4,7 @@ options(stringsAsFactors = F, warn = -1)
 # Prepare NA-replaced Metabolomics Raw Peak Area Data ---------------------------
 
 # NA-replaced peak area
-df <- read.csv("5-worksheet after filling gaps.csv", sep = ",", header = T) 
+df <- read.csv("5-worksheet after filling gaps.csv", sep = ",", header = T) # SuppData 2
 
 # how many batch do you have? 
 total_batch_num <- 2
@@ -26,7 +26,7 @@ for (i in 1:total_batch_num) {
   batch_name <- paste0("Batch", sprintf("%02d", i))
   
   # sample sequencing
-  sam_seq <- read.xlsx("untargeted.samseq.xlsx", 
+  sam_seq <- read.xlsx("untargeted.samseq.xlsx", # not provided
                        sheetIndex = i, header = F, startRow = 1, as.data.frame = T)
   # QC index in each batch
   QC_index <- grep("QC_", sam_seq$X1)
