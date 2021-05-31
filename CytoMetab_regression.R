@@ -12,34 +12,34 @@ options(stringsAsFactors = F)
 # Prepare Metabolomica and Cytokine Data of COVID-19 Patients and Healthy Controls ---------------------------
 
 # Reference files
-m_c.tar <- read.xlsx("metabolite.HMDB.KEGG.HULAB.xlsx",
+m_c.tar <- read.xlsx("metabolite.HMDB.KEGG.HULAB.xlsx", # not provided in Supp files
                      sheetIndex = 2, startRow = 1, header = T, as.data.frame = T)
-m_c.untar <- read.xlsx("metabolite.HMDB.KEGG.HULAB.xlsx",
+m_c.untar <- read.xlsx("metabolite.HMDB.KEGG.HULAB.xlsx", # not provided in Supp files
                        sheetIndex = 3, startRow = 1, header = T, as.data.frame = T)
 m_c.all <- rbind(data.frame("Metabolite" = m_c.tar$Metabolite, "KEGG" = m_c.tar$KEGG),
                  data.frame("Metabolite" = m_c.untar$Metabolite, "KEGG" = m_c.untar$KEGG))
 # metabolits in each pathways
-path_metab <- read.table('path.cpd.txt', header = F, sep = '\t')
+path_metab <- read.table('path.cpd.txt', header = F, sep = '\t') # not provided in Supp files
 path_metab$V2 <- gsub("cpd:", "", path_metab$V2)
 # metabolic pathways
-path_intro <- read.xlsx("has_MetabolicPathway.xlsx",
+path_intro <- read.xlsx("has_MetabolicPathway.xlsx", # not provided in Supp files
                         sheetIndex = 2, startRow = 1, as.data.frame = T, header = F, check.names = T)
 
 # Targeted metabolomics data of COVID-19 patients and healthy controls
-df.tar.metab <- read.csv("COVID-19.targeted.QCmad-TIC.csv", 
+df.tar.metab <- read.csv("COVID-19.targeted.QCmad-TIC.csv",  # SuppData 3
                          sep = ",", header = T, row.names = 1, check.names = F)
 df.tar.metab <- df.tar.metab[, -grep("arnitine", colnames(df.tar.metab))]
 cpd.tar <- m_c.tar$KEGG[match(colnames(df.tar.metab), m_c.tar$Metabolite)]
 
 # Untargeted metabolomics data of COVID-19 patients and healthy controls
-df.untar.metab <- read.csv("COVID-19.untargeted.QCmad-TIC.csv", 
+df.untar.metab <- read.csv("COVID-19.untargeted.QCmad-TIC.csv", # SuppData 3
                            header = T, sep = ",", row.names = 1, check.names = F)
 cpd.untar <- m_c.untar$KEGG[match(colnames(df.untar.metab), m_c.untar$Metabolite)]
 df.untar.metab <- df.untar.metab[, -na.omit(match(cpd.tar[which(cpd.tar != "-")], cpd.untar))]
 cpd.untar <- cpd.untar[-na.omit(match(cpd.tar[which(cpd.tar != "-")], cpd.untar))]
 
 # Targeted metabolomics data of non-COVID-19 patients
-df.noncovid <- read.xlsx("COVID-19.targeted.nonCOVID.QCmad-TIC.xlsx", 
+df.noncovid <- read.xlsx("COVID-19.targeted.nonCOVID.QCmad-TIC.xlsx", # SuppData 3
                          sheetIndex = 1, startRow = 1, row.names = 1, header = T, as.data.frame = T, check.names = F)
 df.noncovid <- df.noncovid[, 1:20]
 df.noncovid <- data.frame(t(df.noncovid), check.names = F)
@@ -48,13 +48,13 @@ df.noncovid <- data.frame(t(df.noncovid), check.names = F)
 df.metab <- cbind(df.tar.metab, df.untar.metab)
 
 # Cytokine data of COVID-19 patients and healthy controls
-df.cyto <- read.xlsx("Cytokine.R.xlsx",
+df.cyto <- read.xlsx("Cytokine.R.xlsx", # SuppData 4
                      sheetIndex = 1, startRow = 1, header = T, row.names = 1, 
                      as.data.frame = T, check.names = F)
 df.cyto <- df.cyto[1:54, c(25:72)]
 
 # clinical information
-df.cli <- read.xlsx("Cytokine.R.xlsx",
+df.cli <- read.xlsx("Cytokine.R.xlsx", # SuppData 1
                     sheetIndex = 1, startRow = 1, header = T, row.names = 1, 
                     as.data.frame = T, check.names = F)
 df.cli <- df.cli[1:54, 4:5]
@@ -144,7 +144,7 @@ cyto_metab.c.all$Metab <- colnames(df.metab)[match(cyto_metab.c.all$Metab, make.
 # Show the Correlations between Cytokines and Metabolic Pathways ---------------------------
 
 # significantly altered cytokines in severe patients compared with healthy controls
-diff.cyto <- read.xlsx('Serum.cytokine.MannWhitneyU.xlsx', 
+diff.cyto <- read.xlsx('Serum.cytokine.MannWhitneyU.xlsx', # Source data
                        sheetIndex = 2, startRow = 1, header = T, as.data.frame = T, check.names = F)
 diff.cyto <- diff.cyto[diff.cyto$BH < 0.05, ]
 
