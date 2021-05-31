@@ -11,27 +11,27 @@ options(stringsAsFactors = F)
 # Prepare Data ---------------------------
 
 # Reference files
-m_c.tar <- read.xlsx("metabolite.HMDB.KEGG.HULAB.xlsx",
+m_c.tar <- read.xlsx("metabolite.HMDB.KEGG.HULAB.xlsx", # not provided in Supp files
                      sheetIndex = 2, startRow = 1, header = T, as.data.frame = T)
-m_c.untar <- read.xlsx("metabolite.HMDB.KEGG.HULAB.xlsx",
+m_c.untar <- read.xlsx("metabolite.HMDB.KEGG.HULAB.xlsx", # not provided in Supp files
                        sheetIndex = 3, startRow = 1, header = T, as.data.frame = T)
 m_c.all <- rbind(data.frame("Metabolite" = m_c.tar$Metabolite, "KEGG" = m_c.tar$KEGG),
                  data.frame("Metabolite" = m_c.untar$Metabolite, "KEGG" = m_c.untar$KEGG))
 # metabolits in each pathways
-path_metab <- read.table('path.cpd.txt', header = F, sep = '\t')
+path_metab <- read.table('path.cpd.txt', header = F, sep = '\t') # not provided in Supp files
 path_metab$V2 <- gsub("cpd:", "", path_metab$V2)
 # metabolic pathways
-path_intro <- read.xlsx("has_MetabolicPathway.xlsx",
+path_intro <- read.xlsx("has_MetabolicPathway.xlsx", # not provided in Supp files
                         sheetIndex = 2, startRow = 1, as.data.frame = T, header = F, check.names = T)
 
 # Targeted metabolomics data
-df.tar.metab <- read.csv("COVID-19.targeted.QCmad-TIC.csv", 
+df.tar.metab <- read.csv("COVID-19.targeted.QCmad-TIC.csv", # SuppData 3
                          sep = ",", header = T, row.names = 1, check.names = F)
 df.tar.metab <- df.tar.metab[, -grep("arnitine", colnames(df.tar.metab))]
 cpd.tar <- m_c.tar$KEGG[match(colnames(df.tar.metab), m_c.tar$Metabolite)]
 
 # Untargeted metabolomics data
-df.untar.metab <- read.csv("COVID-19.untargeted.QCmad-TIC.csv",  
+df.untar.metab <- read.csv("COVID-19.untargeted.QCmad-TIC.csv",  # SuppData 3
                            header = T, sep = ",", row.names = 1, check.names = F)
 cpd.untar <- m_c.untar$KEGG[match(colnames(df.untar.metab), m_c.untar$Metabolite)]
 df.untar.metab <- df.untar.metab[, -na.omit(match(cpd.tar[which(cpd.tar != "-")], cpd.untar))]
@@ -43,19 +43,19 @@ df.metab <- cbind(df.tar.metab, df.untar.metab)
 #            sheetName = "all", row.names = T, col.names = T, append = T)
 
 # Cytokine data from healthy controls (hc)
-df.cyto.hc <- read.xlsx(paste0(wd2, "Cytokine.R.xlsx"),
+df.cyto.hc <- read.xlsx(paste0(wd2, "Cytokine.R.xlsx"), # SuppData 4
                         sheetIndex = 1, startRow = 1, header = T, row.names = 1, 
                         as.data.frame = T, check.names = F)
 df.cyto.hc <- df.cyto.hc[38:54, 23:72]
 
 # Cytokine data from follow-up (fu) patients 
-df.cyto.fu <- read.xlsx(paste0(wd2, "Cytokine.R.xlsx"),
+df.cyto.fu <- read.xlsx(paste0(wd2, "Cytokine.R.xlsx"), # SuppData 3
                           sheetIndex = 2, startRow = 1, header = T, row.names = 1, 
                         as.data.frame = T, check.names = F)
 df.cyto.fu <- df.cyto.fu[rownames(df.cyto.fu) != "S053",]
 
 # days after symptoms onset
-days.so <- data.frame("day" = df.cyto.fu$SampleDay, row.names = rownames(df.cyto.fu))
+days.so <- data.frame("day" = df.cyto.fu$SampleDay, row.names = rownames(df.cyto.fu)) # SuppData 1
 days.so$point <- (days.so$day - 1) %/% 3
 days.so$point[which(days.so$point == 0 | days.so$point > 11)] <- NA
 df.cyto.fu <- df.cyto.fu[!is.na(days.so$point), 27:76]
@@ -253,7 +253,7 @@ df.gam <- data.frame(df.analyte, check.names = T)
 metab_name <- data.frame(Check = colnames(df.gam), 
                          Name = colnames(df.analyte))
 # patients's information
-info <- read.xlsx("细胞因子数据.R.xlsx", 
+info <- read.xlsx("细胞因子数据.R.xlsx", # SuppData 4
                   sheetIndex = 1, startRow = 1, header = T, row.names = 1, as.data.frame = T, check.names = F)
 df.gam$Age <- as.numeric(info$Age[match(rownames(df.gam), rownames(info))])
 df.gam$Gender <- info$Gender[match(rownames(df.gam), rownames(info))]
