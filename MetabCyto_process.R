@@ -8,34 +8,34 @@ options(stringsAsFactors = F)
 # Prepare Metabolomica Data of COVID-19 (, non-COVID-19) Patients and Healthy Controls ---------------------------
 
 # Reference files
-m_c.tar <- read.xlsx(paste0(wd1, "metabolite.HMDB.KEGG.HULAB.xlsx"), 
+m_c.tar <- read.xlsx(paste0(wd1, "metabolite.HMDB.KEGG.HULAB.xlsx"),  # not provided in Supp files
                      sheetIndex = 2, startRow = 1, header = T, as.data.frame = T)
-m_c.untar <- read.xlsx(paste0(wd1, "metabolite.HMDB.KEGG.HULAB.xlsx"),
+m_c.untar <- read.xlsx(paste0(wd1, "metabolite.HMDB.KEGG.HULAB.xlsx"), # not provided
                        sheetIndex = 3, startRow = 1, header = T, as.data.frame = T)
 m_c.all <- rbind(data.frame("Metabolite" = m_c.tar$Metabolite, "KEGG" = m_c.tar$KEGG),
                  data.frame("Metabolite" = m_c.untar$Metabolite, "KEGG" = m_c.untar$KEGG))
 # metabolits in each pathways
-path_metab <- read.table('path.cpd.txt', header = F, sep = '\t')
+path_metab <- read.table('path.cpd.txt', header = F, sep = '\t') # not provided in Supp files
 path_metab$V2 <- gsub("cpd:", "", path_metab$V2)
 # metabolic pathways
-path_intro <- read.xlsx("has_MetabolicPathway.xlsx",
+path_intro <- read.xlsx("has_MetabolicPathway.xlsx",  # not provided in Supp files
                         sheetIndex = 2, startRow = 1, as.data.frame = T, header = F, check.names = T)
 
 # Targeted metabolomics data of COVID-19 patients and healthy controls
-df.tar.metab <- read.csv(paste0(wd2, "COVID-19.targeted.QCmad-TIC.csv"), 
+df.tar.metab <- read.csv(paste0(wd2, "COVID-19.targeted.QCmad-TIC.csv"), # SuppData 3
                          sep = ",", header = T, row.names = 1, check.names = F)
 df.tar.metab <- df.tar.metab[, -grep("arnitine", colnames(df.tar.metab))]
 cpd.tar <- m_c.tar$KEGG[match(colnames(df.tar.metab), m_c.tar$Metabolite)]
 
 # Untargeted metabolomics data of COVID-19 patients and healthy controls
-df.untar.metab <- read.csv(paste0(wd2, "COVID-19.untargeted.QCmad-TIC.csv"), 
+df.untar.metab <- read.csv(paste0(wd2, "COVID-19.untargeted.QCmad-TIC.csv"), # SuppData 3
                            header = T, sep = ",", row.names = 1, check.names = F)
 cpd.untar <- m_c.untar$KEGG[match(colnames(df.untar.metab), m_c.untar$Metabolite)]
 df.untar.metab <- df.untar.metab[, -na.omit(match(cpd.tar[which(cpd.tar != "-")], cpd.untar))]
 cpd.untar <- cpd.untar[-na.omit(match(cpd.tar[which(cpd.tar != "-")], cpd.untar))]
 
 # Targeted metabolomics data of non-COVID-19 patients
-df.noncovid <- read.xlsx("COVID-19.targeted.nonCOVID.QCmad-TIC.xlsx", 
+df.noncovid <- read.xlsx("COVID-19.targeted.nonCOVID.QCmad-TIC.xlsx", # SuppData 3
                          sheetIndex = 1, startRow = 1, row.names = 1, header = T, as.data.frame = T, check.names = F)
 df.noncovid <- df.noncovid[, 1:20]
 df.noncovid <- data.frame(t(df.noncovid), check.names = F)
@@ -127,7 +127,7 @@ test_results$LOG2FC <- log2(test_results[,4])
 group.name <- c("MvsH", "SvsH", "SvsM")
 SMH_kegg <- data.frame()
 for (i in c(1:2)) {
-  metab.wilcox <- read.xlsx(paste0(wd3, "Serum.metabolite.MannWhitneyU.xlsx"), 
+  metab.wilcox <- read.xlsx(paste0(wd3, "Serum.metabolite.MannWhitneyU.xlsx"),  # Source Data
                             sheetIndex = i, startRow = 1, as.data.frame = T, header = T, check.names = F)
   metab.wilcox$cpd <- m_c.all$KEGG[match(metab.wilcox$Metabolite, m_c.all$Metabolite)]
   # Significantly altered metabolites
@@ -189,7 +189,7 @@ ggplot(SMH_kegg, aes(Group, Description)) +
 
 metab.mhu.bind <- data.frame(row.names = colnames(df.metab))
 for (i in c(1:3)) {
-  metab.mhu <- read.xlsx(paste0(wd3, "Serum.metabolite.MannWhitneyU.xlsx"), 
+  metab.mhu <- read.xlsx(paste0(wd3, "Serum.metabolite.MannWhitneyU.xlsx"), # Source dara
                          sheetIndex = i, startRow = 1, as.data.frame = T, header = T, check.names = F)
   metab.mhu$Group <- group.name[i]
   metab.mhu.bind <- data.frame(metab.mhu.bind, 
@@ -244,7 +244,7 @@ ggplot(kegg_table, aes(Description, -log10(p.adjust), fill = FoldEnrich)) +
 # Prepare Data of COVID-19 Patients and Healthy Controls ---------------------------
 
 # Cytokine data of COVID-19 patients and healthy controls
-df.cyto <- read.xlsx(paste0(wd2, "细胞因子数据.R.xlsx"),
+df.cyto <- read.xlsx(paste0(wd2, "细胞因子数据.R.xlsx"), # SuppData 4
                      sheetIndex = 1, startRow = 1, header = T, row.names = 1, 
                      as.data.frame = T, check.names = F)
 df.cyto <- df.cyto[1:54, c(25:72)]
@@ -276,7 +276,7 @@ test_results$LOG2FC <- log2(test_results[,4])
 
 cyto.mhu.bind <- data.frame(row.names = colnames(df.cyto))
 for (i in c(1:2)) {
-  cyto.mhu <- read.xlsx("Serum.cytokine.MannWhitneyU.xlsx", 
+  cyto.mhu <- read.xlsx("Serum.cytokine.MannWhitneyU.xlsx", # Source data
                         sheetIndex = i, startRow = 1, as.data.frame = T, header = T, check.names = F)
   cyto.mhu$Group <- group.name[i]
   cyto.mhu.bind <- rbind(cyto.mhu.bind, 
